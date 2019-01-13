@@ -1,4 +1,4 @@
-from pybrary.complex import *
+from complex import *
 
 
 def split_list(my_list):
