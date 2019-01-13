@@ -68,10 +68,10 @@ class Flock(object):
 
     def move(self,speed=None,theta=None):
         if speed is None:
-            speed = np.random.normal(self.speed,10)
+            speed = abs(np.random.normal(1,1))
             self.speed = speed
         if theta is None:
-            theta = self.theta - np.random.normal(0,.45)
+            theta = self.theta - np.random.normal(0,.0015)
             self.theta = theta
 
         self.set_spots()
@@ -105,7 +105,7 @@ wn = birds.Screen()
 wn.bgcolor("lightgreen")
 wn.setworldcoordinates(-500,-500,500,500)
 
-myFlock = Flock(30)
+myFlock = Flock(10)
 mx = max(myFlock.xcoords)
 ix = min(myFlock.xcoords)
 my = max(myFlock.ycoords)
