@@ -7,6 +7,8 @@ flock_theta_variance = .3
 flock_speed_variance = 10
 bird_error_variance = 60
 n_birds = 30
+v_formation_scale = 30
+animation_speed = 100
 
 def is_even(n):
     if n%2 == 0:
@@ -18,10 +20,10 @@ class Bird(object):
 
     def __init__(self,number,flock):
         self.birdie = birds.Turtle()
-        self.birdie.speed(10)
+        self.birdie.speed(animation_speed)
         self.number = number
         self.flock = flock
-        d = (self.number+1)*10
+        d = (self.number+1)*v_formation_scale
 
         # spots when Flock.theta = 0
         self.xspot_o = self.flock.offset - d
