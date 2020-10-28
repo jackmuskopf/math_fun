@@ -2,7 +2,7 @@ import random as r
 import numpy as np
 import turtle as birds
 
-flock_start_speed = 300
+flock_mean_speed = 300
 flock_theta_variance = .3
 flock_speed_variance = 10
 bird_error_variance = 60
@@ -45,7 +45,7 @@ class Bird(object):
 
 class Flock(object):
 
-    def __init__(self,nbirds,theta=0,speed=flock_start_speed):
+    def __init__(self,nbirds,theta=0,speed=flock_mean_speed):
         colors  = ["red","green","blue","orange","purple","pink","yellow"]
         self.nbirds = nbirds
         self.offset = nbirds/2 + 1
@@ -80,6 +80,7 @@ class Flock(object):
 
         # get birds into V formation
         for bird in self.birdies:
+
             # rotation matrix
             bird.xspot = np.cos(self.theta)*bird.xspot_o - np.sin(self.theta)*bird.yspot_o
             bird.yspot = np.sin(self.theta)*bird.xspot_o + np.cos(self.theta)*bird.yspot_o
@@ -87,9 +88,8 @@ class Flock(object):
 
 
     def move(self,dv=None,dtheta=None):
-        if dv is None:
-            dv = np.random.normal(0,flock_speed_variance)
-        self.speed += dv
+        
+        self.speed  = np.random.normal(flock_mean_speed, flock_speed_variance)
         if dtheta is None:
             dtheta = np.random.normal(0,flock_theta_variance)
         self.theta += dtheta
@@ -103,8 +103,6 @@ class Flock(object):
         for bird in self.birdies:
             dbx = flock_xv + np.random.normal(0,bird_error_variance)
             dby = flock_yv + np.random.normal(0,bird_error_variance)
-            print(dbx, dby)
-            print(bird.x, bird.y)
             bird.goto(bird.x+dbx,bird.y+dby)
 
 
